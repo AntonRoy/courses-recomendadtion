@@ -33,21 +33,21 @@
         <br>
         <form method="post">
             <div align = center class = "container ">
-                {%for course in courses%}
+                {%for i in range(length)%}
                     <div class="row" align="center">
                     <div class="col s40 m25">
                       <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
-                          <span class="card-title">{{course[0]}}</span>
-                          <p>{{course[1]}}</p>
+                          <span class="card-title">{{courses[i][0]}}</span>
+                          <p>{{courses[i][1]}}</p>
                         </div>
                           <div class="checkbox">
                             <div class="card-action">
-                                &nbsp;&nbsp;&nbsp;<label for="{{course[3]}}">
-                                <input type="checkbox" id="{{course[3]}}" name="{{course[3]}}"/>
+                                &nbsp;&nbsp;&nbsp;<label for="{{i}}">
+                                <input type="checkbox" id="{{i}}" name="{{i}}"/>
                                 <span class="fake-input"></span>
                             </label>
-                                <a href="{{course[3]}}" target="_blank">{{course[3][8:].split('/')[0]}}</a>
+                                <a href="{{courses[i][3]}}" target="_blank">{{courses[i][3][8:].split('/')[0]}}</a>
                             </div>
                           </div>
                       </div>
@@ -59,7 +59,7 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
         </form>
-        <style type="text/css">
+    <style type="text/css">
         .fake-input {
             float: left;
             width: 20px;
@@ -87,14 +87,14 @@
             bottom: 0;
         }
     </style>
-    <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
     </body>
+    <script>
+        $('linkSelector').click(function (e) {
+            e.preventDefault()
+        /*dome code here*/
+        });
+    </script>
+        <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://yastatic.net/jquery/3.1.1/jquery.min.js"></script>
+      <script type="text/javascript" src="{{ url_for('static', filename='materialize/js/materialize.min.js') }}"></script>
 </html>
-<script>
-    $(document).ready(function() {
-		// Initialize Material Select
-		$('.mdb-select').material_select();
-	});
-</script>
