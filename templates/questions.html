@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Courses recomendation</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</head>
+<nav>
+    <div class="nav-wrapper teal darken-2">
+        <a href="#" class="brand-logo center"> &nbsp; Courses recomendation</a>
+    </div>
+</nav>
+<form method="post">
+    <div class="input-field col s6">
+        <label for="first_name">First Name</label>
+        <p>&shy;&nbsp;&nbsp;&nbsp;</p>
+        <input id="first_name" name="first_name" type="text" class="validate">
+    </div>
+    <div class="input-field col s6">
+        <label for="last_name">Last Name</label>
+        <p>&shy;&nbsp;&nbsp;&nbsp;</p>
+        <input id="last_name" name="last_name" type="text" class="validate">
+    </div>
+    &shy;
+    <label>Mark your programming languages</label>
+    <div class="form-group">
+        <div class="checkbox">
+            {%for language in languages%}
+            &nbsp;&nbsp;&nbsp;<label for="{{language}}">
+                <input type="checkbox" id="{{language}}" name="{{language}}"/>
+                <span class="fake-input"></span>
+                <span class="fake-label">{{language}}</span>
+            </label>
+            {%if language == "HTML"%}
+                <p>&shy;&nbsp;&nbsp;</p>
+            {%endif%}
+            {%endfor%}
+        </div>
+    </div>
+    <style type="text/css">
+        .fake-input {
+            float: left;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #9f9f9f;
+            background: #fff;
+            vertical-align: middle;
+            position: relative;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+        input[type="checkbox"] {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+        }
+        input[type="checkbox"]:checked + .fake-input:before {
+            content:"\2713";
+            position: absolute;
+            color: #000;
+            text-align: center;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+    <p>&shy;&shy;&shy;&shy;</p>
+    <select class="custom-select" name="sphere">
+        <option disabled selected>Choose you sphere</option>
+        {%for sphere in spheres%}
+            <option>{{sphere}}</option>
+        {%endfor%}
+    </select>
+    <p>&shy;&nbsp;</p>
+    &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-default">Submit</button>
+</form>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</>
+</html>
