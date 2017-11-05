@@ -87,6 +87,7 @@ def recomendate():
     elif request.method == 'GET' and request.cookies.get('user_id'):
         id_ = request.cookies.get('user_id')
         courses = users[str(id_)][0]
+        courses = list(map(lambda x: [x[0], ". ".join(x[1].split(". ")[:4]) + ". ", x[2], x[3]], courses))
         return render_template('recomendation.html', courses=courses, length=len(courses))
     else:
         return redirect('/questions')
@@ -105,7 +106,7 @@ def recomendation():
         sphere = request.form['sphere']
         response = make_response(redirect('/recomendation'))
         response.set_cookie('user_id', id_)
-        users[id_] = [courses_of_sphere(sphere, 15), first_name, last_name, lang]
+        users[id_] = [courses_of_sphere(sphere, 10), first_name, last_name, lang]
         return response
     elif request.method == "GET":
         return render_template("questions.html", languages=languages, spheres=spheres)
