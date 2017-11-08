@@ -8,10 +8,6 @@ import uuid
 app = Flask(__name__)
 boostrap = Bootstrap(app)
 
-UPLOAD_FOLDER = '/home/anton/Documents/CursRec/static'
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 languages = ['Python', 'Scala', 'PHP', 'Java', 'Haskell',
              'Rust', 'C++', 'C#', 'C', 'HTML', 'CSS',
              'Javascript', 'Ruby', 'GO', 'TypeScript',
@@ -37,7 +33,7 @@ sphere2tags = {
     'feature extraction',
     'fuzzy clustering',
      'SVD', 'NMF', 'DSSM'],
-    'Программист распределенных систем': ['hadoop', 'spark', 'haskel', 'rust', 'exonum', 'python', 'R', ]
+    'Программист распределенных систем': ['hadoop', 'spark', 'haskel', 'rust', 'exonum', 'python', 'R']
 }
 
 users = {}
@@ -63,12 +59,12 @@ def courses_of_sphere(sphere, n_courses):
     return list(map(lambda x: x[1], best_courses))
 
 
-@app.route("/")
+@app.route("/rec_sys/")
 def start():
-    return redirect('/questions')
+    return redirect('/rec_sys/questions')
 
 
-@app.route("/recomendation", methods=['GET', 'POST'])
+@app.route("/rec_sys/recomendation", methods=['GET', 'POST'])
 def recomendate():
     if request.method == 'POST':
         cnn = sqlite3.connect('dataset')
@@ -90,10 +86,10 @@ def recomendate():
         courses = list(map(lambda x: [x[0], ". ".join(x[1].split(". ")[:4]) + ". ", x[2], x[3]], courses))
         return render_template('recomendation.html', courses=courses, length=len(courses))
     else:
-        return redirect('/questions')
+        return redirect('/rec_sys/questions')
 
 
-@app.route('/questions', methods=['GET', 'POST'])
+@app.route('/rec_sys/questions', methods=['GET', 'POST'])
 def recomendation():
     global languages, spheres, courses
     if request.method == 'POST':
@@ -104,7 +100,7 @@ def recomendation():
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         sphere = request.form['sphere']
-        response = make_response(redirect('/recomendation'))
+        response = make_response(redirect('/rec_sys/recomendation'))
         response.set_cookie('user_id', id_)
         users[id_] = [courses_of_sphere(sphere, 10), first_name, last_name, lang]
         return response
@@ -116,4 +112,4 @@ app.secret_key = os.urandom(24)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
